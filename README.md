@@ -1,6 +1,6 @@
 # docker_on_ubuntu
 How to install docker desktop on Ubuntu 
-[based_on](https://docs.docker.com/desktop/install/linux/)
+[based_on_this](https://docs.docker.com/desktop/install/linux/)
 
 ## Steps
 1. sudo apt install gnome-terminal
@@ -20,5 +20,23 @@ echo \
   sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 sudo apt-get update
 ```
-2. Download the latest DEB package.[link](https://desktop.docker.com/linux/main/amd64/docker-desktop-amd64.deb?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64)
-3. 
+2. Download the latest DEB package. [link](https://desktop.docker.com/linux/main/amd64/docker-desktop-amd64.deb?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64)
+3. Install the package with apt as follows:
+```bask
+sudo apt-get update
+sudo apt-get install ./docker-desktop-<arch>.deb
+```
+4. Sets the capability on the Docker Desktop binary to map privileged ports and set resource limits.
+get path to docker
+```bash
+which docker
+```
+check if it's not a symlink
+```bash
+ls -l PATH
+```
+setcap on the actual binary:
+```bash
+sudo setcap 'cap_net_bind_service,cap_sys_resource=eip' /PATH/TO/ACTUAL/BINARY
+```
+5. 
